@@ -298,9 +298,17 @@ Nota: a lista acima reflete os nomes declarados no Stack raiz. Rotas adicionais 
 - Permite selecionar até oito imagens; a publicação valida campos, URL e tamanho dos ficheiros.
 - Inclui carregamento da lista e ativação/desativação de anúncios.
 
-#### Segurança e histórico de pagamentos
-- Rotas registadas no Stack.
-- Os detalhes de campos, ações e estados destas duas telas ainda precisam de inspeção direta dos respetivos ficheiros para completar esta ficha. Não inferir funções a partir apenas do nome da rota.
+#### Segurança e privacidade
+- Apresenta definições de privacidade para controlar a visibilidade do telefone, e-mail e localização.
+- Inclui linhas de ação, controlos Switch, campos de palavra-passe com alternância de visibilidade e indicador de força.
+- Declara contacto de suporte por e-mail.
+- As preferências e alterações de credenciais devem ser confirmadas no backend; não assumir que um Switch local equivale a uma política RLS.
+
+#### Histórico de pagamentos e atividade
+- Ajusta o conteúdo ao papel: compras para comprador, vendas para agricultor/agente e entregas para motorista.
+- Filtros declarados: Todos, Atividade e Pagamentos.
+- Consolida informação de pedidos/pré-pedidos, produtos, comissões, cargas e registos de pagamento disponíveis.
+- O código tolera tabelas/colunas opcionais ausentes e diferencia dados reais de itens marcados como demonstração. A interface deve deixar essa distinção inequívoca e nunca apresentar demonstrações como transações reais.
 
 ## 7. Componentes de UI partilhados
 
@@ -319,6 +327,7 @@ Nota: a lista acima reflete os nomes declarados no Stack raiz. Rotas adicionais 
 | `PaymentSheet` | interface de pagamento reutilizada no feed/pesquisa |
 | `UserConnections` / `UserConnectionsSummary` | relações e resumo de ligações |
 | `AgrilinkAdCard` | apresentação de anúncio |
+| `ProcessingScreenProvider` | contexto para estados de processamento |
 | `GoogleLogo` | marca do fornecedor Google no login |
 
 A lista é baseada nos imports e ficheiros examinados; não é ainda um inventário integral de todos os componentes em `src/components`.
@@ -371,7 +380,7 @@ O cliente precisa de `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_ANON_KEY
 5. **Serviços de mapa:** o MapPicker usa Nominatim e tiles OpenStreetMap; disponibilidade, limites e atribuição devem ser respeitados.
 6. **Localização em segundo plano:** requer permissões e configuração nativa próprias; testar em dispositivos reais, não apenas simulador.
 7. **Idioma:** os idiomas declarados em código e a descrição do README não estão totalmente alinhados.
-8. **Rotas com ficha incompleta:** `/seguranca` e `/historicopagamentos` precisam de inspeção de implementação para esta documentação detalhar todos os controlos e estados.
+8. **Histórico com dados de demonstração:** `historicopagamentos.tsx` tipa explicitamente itens com `isDemo`; verificar como são sinalizados visualmente e garantir que não são confundidos com transações confirmadas.
 9. **Acessibilidade:** a leitura estática não confirma labels de leitor de ecrã, foco, contraste efetivo, áreas de toque ou navegação por teclado. Validar em Android e iOS.
 10. **Documentação não é certificação funcional:** nenhum fluxo é declarado “100% funcional” sem execução ponta a ponta com contas, dados e serviços reais.
 
@@ -432,7 +441,7 @@ O script `build:apk` executa verificações Expo e TypeScript antes do EAS Build
 - `src/app/profile.tsx`, `profile/[id].tsx`
 - ecrãs de entregas, rastreamento, mapa e fichas
 - ecrãs de mensagens, notificações e administração
-- `src/components/BottomToolbar.tsx`, `ProductCard.tsx`, `MapPicker.tsx`
+- `src/components/BottomToolbar.tsx`, `ProductCard.tsx`, `MapPicker.tsx`, `MapViewer.tsx`, `GuestModeCard.tsx`, `RoleGuard.tsx`, `FreightAccessGuard.tsx`
 - `src/constants/roleActions.ts`, `src/constants/i18n.ts`
 - `src/context/RoleContext.tsx`
 
