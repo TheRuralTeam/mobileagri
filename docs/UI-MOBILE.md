@@ -448,3 +448,93 @@ O script `build:apk` executa verificações Expo e TypeScript antes do EAS Build
 ---
 
 **Próxima revisão:** completar a inspeção linha a linha de todas as rotas e componentes, acrescentar capturas reais de cada ecrã e registar para cada botão o handler, a tabela/RPC/serviço chamado, o estado de sucesso/erro e o teste correspondente.
+
+
+## 15. Direção visual oficial — identidade AgriLink
+
+Esta secção define os requisitos de design que devem orientar a evolução do UI mobile. É uma direção de produto, não uma afirmação de que todos os requisitos já estão implementados.
+
+### 15.1 Princípio de identidade
+
+A aplicação deve ser imediatamente reconhecível como AgriLink, e não como um template genérico de marketplace ou um conjunto de ecrãs gerados a partir de padrões visuais comuns de IA. A identidade deve nascer do contexto real da plataforma: produção agrícola, cadeia de abastecimento, comércio B2B, logística e participantes do mercado angolano.
+
+A marca deve aparecer com consistência, sem transformar cada ecrã numa peça publicitária. O logótipo e os elementos proprietários devem ser usados com proporção e espaço adequados. A interface deve privilegiar conteúdo, fotografias reais dos produtos e informação operacional verificável.
+
+### 15.2 Linguagem visual
+
+- **Sóbria e funcional:** hierarquia tipográfica clara, grelha consistente e composição com espaço negativo suficiente.
+- **Minimalista sem ser vazia:** remover decoração sem função; manter contexto, rótulos, estados e instruções necessários para concluir tarefas.
+- **Agrícola e comercial sem clichés:** evitar ilustrações genéricas de folhas, campos, tratores ou imagens artificiais como decoração recorrente. O contexto agrícola deve surgir sobretudo nos dados, fotografias reais, linguagem e fluxos do produto.
+- **Sem aparência de template:** não repetir indiscriminadamente cartões arredondados, gradientes, fundos translúcidos, sombras fortes, badges decorativos, grandes títulos promocionais ou grelhas de cartões idênticas em todas as páginas.
+- **Ícones com significado:** usar uma família coerente de ícones, com traço e dimensões consistentes; não misturar estilos outline, preenchidos e 3D sem razão funcional.
+- **Fotografia honesta:** priorizar imagens de produtos e participantes reais fornecidas pela plataforma. Não usar imagens geradas como substituto de fotografias de inventário ou prova de produto.
+
+### 15.3 Sistema de design
+
+Criar e manter tokens centralizados para:
+- cores semânticas (marca, texto, superfície, fundo, borda, sucesso, aviso, erro e informação);
+- tipografia (famílias, pesos, tamanhos, alturas de linha e escala);
+- espaçamento e grelha;
+- raios, elevação e contornos;
+- dimensões mínimas de toque;
+- ícones e estados de interação.
+
+Os valores existentes na secção 3 são a referência inicial observada, não uma licença para criar variantes locais em cada tela. Antes de alterar a paleta, validar o logótipo e os ativos oficiais existentes no repositório. Componentes devem consumir tokens, não declarar cores e medidas arbitrárias repetidamente.
+
+### 15.4 Componentes e padrões
+
+Definir componentes reutilizáveis com variantes explícitas e limitadas:
+- botões primário, secundário, terciário, destrutivo e de ícone;
+- campos de texto, seleção, pesquisa, quantidade, data e localização;
+- cartões de produto e de operação, sem impor cartões a todo o conteúdo;
+- cabeçalhos, navegação inferior e navegação contextual por papel;
+- listas, linhas de dados, filtros e separadores;
+- diálogos, folhas inferiores, menus e confirmação de ações;
+- estados vazios, carregamento, erro, sucesso e sem ligação;
+- etiquetas de estado apenas quando comunicam informação útil.
+
+Cada componente deve documentar propriedades, variantes, comportamento, acessibilidade e exemplos de utilização. Evitar criar componentes quase duplicados com pequenas diferenças de estilo.
+
+### 15.5 Responsividade e adaptação
+
+A aplicação deve adaptar-se ao espaço disponível, não apenas reduzir proporcionalmente um layout de telemóvel. Validar:
+- telemóveis compactos e grandes, tablets e diferentes densidades;
+- orientação vertical e horizontal onde o fluxo o permitir;
+- áreas seguras, recortes, barras de sistema e navegação do dispositivo;
+- teclado aberto, campos focados e formulários longos;
+- nomes, endereços, descrições e traduções extensas;
+- listas sem dados, muitos resultados e carregamento progressivo;
+- botões e alvos de toque sem sobreposição ou áreas inacessíveis.
+
+Usar layouts flexíveis, limites de largura quando apropriado, scroll apenas no eixo necessário e áreas de toque adequadas. Não fixar larguras/alturas que provoquem corte de texto ou escondam ações. Em tablets, aproveitar o espaço com composição própria (por exemplo, duas colunas quando fizer sentido), em vez de esticar cartões de telemóvel.
+
+### 15.6 Acessibilidade e legibilidade
+
+- cumprir WCAG 2.2 AA como referência de qualidade, adaptada às capacidades nativas de Android/iOS;
+- manter contraste suficiente e não depender apenas da cor;
+- disponibilizar nomes acessíveis para ícones e controlos;
+- suportar aumento de tamanho de texto sem truncar conteúdo essencial;
+- garantir ordem de foco lógica e compatibilidade com TalkBack/VoiceOver;
+- fornecer feedback textual e visual para validação, erro e sucesso;
+- respeitar redução de movimento e evitar animações que atrasem tarefas.
+
+### 15.7 Critérios de aceitação visual
+
+Uma alteração de UI só deve ser considerada concluída quando:
+1. usa os tokens e componentes oficiais, ou documenta a razão para uma exceção;
+2. mantém identidade AgriLink sem recorrer a decoração genérica;
+3. foi verificada em pelo menos um dispositivo compacto, um dispositivo grande e um tablet/emulador de tablet;
+4. não apresenta overflow, clipping, sobreposição ou ações escondidas;
+5. funciona com texto ampliado, teclado aberto, conteúdo longo e estados vazios/erro;
+6. mantém acessibilidade de toque, leitor de ecrã e contraste;
+7. não altera nem remove fluxos de negócio existentes;
+8. todos os controlos continuam ligados às ações reais e apresentam o resultado confirmado pelo serviço.
+
+### 15.8 Processo recomendado de evolução
+
+1. Inventariar os ativos oficiais da marca, componentes atuais e diferenças entre ecrãs.
+2. Consolidar tokens e componentes base sem alterar regras de negócio.
+3. Escolher e redesenhar um fluxo representativo (por exemplo, feed → detalhe do produto → contacto/pré-encomenda) como referência visual.
+4. Validar com os diferentes papéis e tamanhos de ecrã.
+5. Aplicar o sistema gradualmente às restantes rotas, com testes de regressão por fluxo.
+6. Registar capturas reais antes/depois e problemas encontrados; não declarar responsividade total sem matriz de dispositivos validada.
